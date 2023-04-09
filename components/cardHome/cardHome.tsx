@@ -6,6 +6,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import BottomNavigation from "@mui/material/BottomNavigation/BottomNavigation";
+import { useRouter } from "next/router";
 
 type CardHomeProps = {
   title: string;
@@ -14,6 +15,8 @@ type CardHomeProps = {
 };
 
 export default function cardHome({ title, image, id }: CardHomeProps) {
+  const { push } = useRouter();
+
   return (
     <Card sx={{ maxWidth: "345px", height: "450px" }}>
       <CardMedia
@@ -45,7 +48,7 @@ export default function cardHome({ title, image, id }: CardHomeProps) {
         <Button
           variant="contained"
           size="medium"
-          onClick={() => `/comic/${id}`}
+          onClick={() => push(`/comic/${id}`)}
         >
           Details
         </Button>
