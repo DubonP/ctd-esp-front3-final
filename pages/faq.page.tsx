@@ -1,22 +1,14 @@
 import * as React from "react";
 import { useState } from "react";
-import { styled } from "@mui/material/styles";
 import ArrowForwardIosSharpIcon from "@mui/icons-material/ArrowForwardIosSharp";
-import MuiAccordion, { AccordionProps } from "@mui/material/Accordion";
-import MuiAccordionSummary, {
-  AccordionSummaryProps,
-} from "@mui/material/AccordionSummary";
 import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
   Box,
   Container,
-  Link,
-  Toolbar,
   Typography,
 } from "@mui/material";
-import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import { faqsData } from "dh-marvel/components/faqs/faqsData";
 
 type FaqProps = {
