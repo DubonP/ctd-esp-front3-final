@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import BottomNavigation from "@mui/material/BottomNavigation/BottomNavigation";
 import { useRouter } from "next/router";
+import { Grid, Link } from "@mui/material";
 
 type CardHomeProps = {
   title: string;
@@ -42,7 +43,11 @@ export default function cardHome({ title, image, id }: CardHomeProps) {
           bottom: "0px",
         }}
       >
-        <Button variant="contained" size="medium">
+        <Button
+          variant="contained"
+          size="medium"
+          onClick={() => push(`/checkout/${id}`)}
+        >
           Buy
         </Button>
         <Button

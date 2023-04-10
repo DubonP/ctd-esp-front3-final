@@ -1,16 +1,9 @@
-import type { NextPage } from "next";
 import Head from "next/head";
 import BodySingle from "dh-marvel/components/layouts/body/single/body-single";
 import type { GetServerSideProps } from "next";
 import { getComics } from "dh-marvel/services/marvel/marvel.service";
-import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import cardHome from "dh-marvel/components/cardHome/cardHome";
-import { Button } from "@mui/material";
-import { useState } from "react";
-
-type Props = {
-  comics: any;
-};
+import { Button, Grid, Box } from "@mui/material";
 
 type ComicsProps = {
   id: number;
@@ -28,17 +21,34 @@ export default function Home({ data }: { data: ComicsProps[] }) {
         <title>Home</title>
       </Head>
       <BodySingle>
-        <div>
+        <Grid
+          sx={{
+            marginTop: "20px",
+          }}
+          container
+          spacing={2}
+        >
           {data?.map((comic: any) => (
-            <div key={comic.id}>
+            <Grid
+              item
+              xs={4}
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                flexDirection: "row",
+                height: "100%",
+              }}
+              key={comic.id}
+            >
               {cardHome({
                 title: comic.title,
                 image: `${comic.thumbnail.path}.${comic.thumbnail.extension}`,
                 id: comic.id,
               })}
-            </div>
+            </Grid>
           ))}
-        </div>
+        </Grid>
         <Button variant="contained" size="medium" id="load-more">
           Load more
         </Button>
@@ -48,7 +58,7 @@ export default function Home({ data }: { data: ComicsProps[] }) {
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const { data: comics } = await getComics(0, 100);
+  const { data: comics } = await getComics(0, 12);
 
   const data = comics.results;
 

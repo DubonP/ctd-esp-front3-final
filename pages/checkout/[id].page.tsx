@@ -1,30 +1,9 @@
-/* A página deve ter um formulário dividido em 3 seções ou etapas:
-Dados pessoais
-Endereço de entrega
-Detalhes do pagamento
-A seção de endereço de entrega deve conter os seguintes campos:
-Endereço (obrigatório)
-Departamento, andar, etc (opcional)
-Cidade (obrigatório)
-Província (obrigatório)
-CEP (obrigatório)
-Por fim, a seção de pagamento deve ter os seguintes campos obrigatórios:
-Número de cartão
-Nome como aparece no cartão
-Data de expiração
-Código de segurança (estilo de senha secreta ***)
-O formulário deve ser construído usando React Hook Form e Material UI
-O componente Mui deve ser o Stepper
-Envio (enviar) do formulário */
-
 import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Button, TextField, Typography } from "@mui/material";
-import { styled } from "@mui/material/styles";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Alert } from "@mui/material";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 type FormValues = {
   name: string;
@@ -56,7 +35,7 @@ const userMessageSchema = Yup.object().shape({
   securityCode: Yup.string().required("Security Code is required"),
 });
 
-export default function Checkout() {
+export default function Checkout(data: any) {
   const {
     register,
     handleSubmit,
