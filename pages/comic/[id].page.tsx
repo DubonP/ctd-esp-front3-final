@@ -5,6 +5,7 @@ import { getComic, getComics } from "dh-marvel/services/marvel/marvel.service";
 import { Comic } from "types/typeComics";
 
 export default function Index(data: Comic) {
+  console.log(data);
   return <CardComic {...data} />;
 }
 

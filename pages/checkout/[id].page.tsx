@@ -11,8 +11,13 @@ import {
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Alert } from "@mui/material";
-import { getComic } from "dh-marvel/services/marvel/marvel.service";
-import { GetServerSideProps, NextPage } from "next";
+import { getComic, getComics } from "dh-marvel/services/marvel/marvel.service";
+import {
+  GetServerSideProps,
+  NextPage,
+  GetStaticPropsContext,
+  GetStaticPaths,
+} from "next";
 import { Comic } from "types/typeComics";
 
 type FormValues = {
@@ -29,10 +34,11 @@ type FormValues = {
   expirationDate: string;
   securityCode: string;
   id: number;
+  comicTitle: string;
 };
 
 interface Props {
-  data: Comic;
+  checkData: Comic;
 }
 
 const userMessageSchema = Yup.object().shape({
@@ -50,7 +56,7 @@ const userMessageSchema = Yup.object().shape({
   securityCode: Yup.string().required("Security Code is required"),
 });
 
-const Checkout: NextPage<Props> = ({ data }: Props) => {
+export default function Checkout(checkData: Comic) {
   const {
     register,
     handleSubmit,
@@ -58,8 +64,6 @@ const Checkout: NextPage<Props> = ({ data }: Props) => {
   } = useForm<FormValues>({
     resolver: yupResolver(userMessageSchema),
   });
-
-  console.log(data);
 
   const createMessageRequest: SubmitHandler<FormValues> = (data) => {
     console.log(data);
@@ -330,7 +334,7 @@ const Checkout: NextPage<Props> = ({ data }: Props) => {
             </span>
             <br />
           </div>
-          {/* <Container maxWidth="sm" sx={{ marginTop: "30px" }}>
+          <Container maxWidth="sm" sx={{ marginTop: "30px" }}>
             <Paper
               sx={{
                 padding: 2,
@@ -342,17 +346,17 @@ const Checkout: NextPage<Props> = ({ data }: Props) => {
             >
               <CardMedia
                 component="img"
-                src={`${data.thumbnail.path}.${data.thumbnail.extension}`}
+                src={`${checkData.thumbnail.path}.${checkData.thumbnail.extension}`}
                 sx={{ width: "200px" }}
               />
-              <Typography fontSize={18}>
-                <strong>Título:</strong> {data.title}
+              <Typography {...register("comicTitle")} fontSize={18}>
+                <strong>Título:</strong> {checkData.title}
               </Typography>
               <Typography fontSize={18}>
-                <strong>Preço:</strong> {data.price}
+                <strong>Preço:</strong> {checkData.price}
               </Typography>
             </Paper>
-          </Container> */}
+          </Container>
           <Button
             variant="contained"
             sx={{ width: 300, marginTop: 2 }}
@@ -364,17 +368,39 @@ const Checkout: NextPage<Props> = ({ data }: Props) => {
       </main>
     </>
   );
-};
+}
 
-export default Checkout;
+export const getStaticPaths: GetStaticPaths = async () => {
+  const { data: comics } = await getComics(0, 100);
 
-export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-  const { id } = query;
-  const comic = await getComic(Number(id));
+  const data = comics.results;
+
+  const paths = data.map((comic: any) => {
+    return {
+      params: {
+        id: comic.id.toString(),
+      },
+    };
+  });
 
   return {
-    props: {
-      comic,
-    },
+    paths,
+    fallback: "blocking",
+  };
+};
+
+type Params = {
+  id: string;
+};
+
+export const getStaticProps = async (ctx: GetStaticPropsContext<Params>) => {
+  const { params } = ctx;
+
+  const comic = await getComic(Number(params?.id));
+
+  if (!comic) return;
+
+  return {
+    props: comic,
   };
 };
