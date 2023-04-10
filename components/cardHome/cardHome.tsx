@@ -34,7 +34,7 @@ export default function cardHome({ title, image, id }: CardHomeProps) {
           {title}
         </Typography>
       </CardContent>
-      <BottomNavigation />
+
       <CardActions
         sx={{
           display: "flex",
@@ -53,7 +53,6 @@ export default function cardHome({ title, image, id }: CardHomeProps) {
           Details
         </Button>
       </CardActions>
-      <BottomNavigation />
     </Card>
   );
 }

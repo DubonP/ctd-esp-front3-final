@@ -28,23 +28,17 @@ export default function Home({ data }: { data: ComicsProps[] }) {
         <title>Home</title>
       </Head>
       <BodySingle>
-        <Grid2
-          container
-          spacing={2}
-          sx={{
-            marginTop: "20px",
-          }}
-        >
+        <div>
           {data?.map((comic: any) => (
-            <Grid2 xs={12} sm={6} md={4} key={comic.id}>
+            <div key={comic.id}>
               {cardHome({
                 title: comic.title,
                 image: `${comic.thumbnail.path}.${comic.thumbnail.extension}`,
                 id: comic.id,
               })}
-            </Grid2>
+            </div>
           ))}
-        </Grid2>
+        </div>
         <Button variant="contained" size="medium" id="load-more">
           Load more
         </Button>
