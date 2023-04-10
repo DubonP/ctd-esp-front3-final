@@ -1,6 +1,5 @@
 import * as React from "react";
-import { Button, Typography, Box, Grid, Stack, Paper } from "@mui/material";
-import Link from "next/link";
+import { Typography, Box, Grid, Stack, Paper } from "@mui/material";
 import { useRouter } from "next/router";
 import { Comic } from "types/typeComics";
 import Image from "next/image";
@@ -9,15 +8,7 @@ import { styled } from "@mui/material/styles";
 export default function CardHero({
   name,
   comics,
-  series,
-  stories,
-  events,
-  title,
   thumbnail,
-  price,
-  oldPrice,
-  stock,
-  characters,
   description,
 }: Comic) {
   function getId(url: string) {

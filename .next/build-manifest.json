@@ -30,11 +30,6 @@
       "static/chunks/main.js",
       "static/chunks/pages/character/[id].js"
     ],
-    "/checkout/[id]": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/checkout/[id].js"
-    ],
     "/comic/[id]": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
