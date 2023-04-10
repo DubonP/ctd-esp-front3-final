@@ -11,7 +11,7 @@ export default function Index(data: Comic) {
 export const getStaticPaths: GetStaticPaths = async () => {
   const { data: comics } = await getComics(0, 100);
 
-  const data = comics.results;
+  const data = comics?.results;
 
   const paths = data.map((comic: any) => {
     return {
