@@ -14,6 +14,7 @@ export default function CardComic({
   stock,
   characters,
   description,
+  id,
 }: Comic) {
   function getId(url: string) {
     const regex = /\/characters\/(\d+)/;
@@ -82,7 +83,7 @@ export default function CardComic({
           </Box>
           <Button
             variant="contained"
-            onClick={() => push("/checkout")}
+            onClick={() => push(`/checkout/${id}`)}
             disabled={stock == 0}
           >
             {stock > 0 ? "Buy" : "Stock outs"}
