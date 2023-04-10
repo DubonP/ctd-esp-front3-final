@@ -1,4 +1,9 @@
 export interface Comic {
+  series: Series;
+  stories: Stories;
+  events: Events;
+  name: string;
+  comics: Comics;
   id: number;
   title: string;
   issueNumber: number;
@@ -12,6 +17,34 @@ export interface Comic {
   thumbnail: Thumbnail;
   images: Image[];
   characters: Characters;
+}
+
+export interface Events {
+  available: number;
+  collectionURI: string;
+  items: Item3[];
+  returned: number;
+}
+
+export interface Series {
+  available: number;
+  collectionURI: string;
+  items: Item3[];
+  returned: number;
+}
+
+export interface Stories {
+  available: number;
+  collectionURI: string;
+  items: Item3[];
+  returned: number;
+}
+
+export interface Comics {
+  available: number;
+  collectionURI: string;
+  items: Item[];
+  returned: number;
 }
 
 export interface Url {

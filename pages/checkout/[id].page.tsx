@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import {
   Button,
@@ -7,22 +7,15 @@ import {
   CardMedia,
   Paper,
   Container,
+  Alert,
 } from "@mui/material";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Alert } from "@mui/material";
 import { getComic, getComics } from "dh-marvel/services/marvel/marvel.service";
-import {
-  GetServerSideProps,
-  NextPage,
-  GetStaticPropsContext,
-  GetStaticPaths,
-} from "next";
+import { GetStaticPropsContext, GetStaticPaths } from "next";
 import { Comic } from "types/typeComics";
-import { useState } from "react";
+import { useState, useContext, createContext } from "react";
 import { useRouter } from "next/router";
-import { create } from "domain";
-import { createContext } from "react";
 import axios from "axios";
 
 type CheckoutInput = {
@@ -57,10 +50,6 @@ type FormValues = {
   comicTitle: string;
 };
 
-interface Props {
-  checkData: Comic;
-}
-
 const userMessageSchema = Yup.object().shape({
   name: Yup.string().required("Name is required"),
   lastName: Yup.string().required("Last Name is required"),
@@ -84,7 +73,7 @@ type defaultValue = {
 const CheckoutContext = createContext({} as defaultValue);
 
 export default function Checkout(checkData: Comic) {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const [messageError, setMessageError] = useState("");
   const router = useRouter();
   const { handleCheckout } = useContext(CheckoutContext);
@@ -128,15 +117,6 @@ export default function Checkout(checkData: Comic) {
   } = useForm<FormValues>({
     resolver: yupResolver(userMessageSchema),
   });
-
-  const createMessageRequest: SubmitHandler<FormValues> = (data) => {
-    console.log(data);
-    alert(
-      `nome: ${data.name} sobrenome: ${data.lastName} email: ${data.email}
-      ${checkData.title}
-      `
-    );
-  };
 
   return (
     <>
