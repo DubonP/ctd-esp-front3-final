@@ -25,6 +25,21 @@ import { create } from "domain";
 import { createContext } from "react";
 import axios from "axios";
 
+type CheckoutInput = {
+  customer: {
+    name: string;
+    lastname: string;
+    email: string;
+    address: {
+      address1: string;
+      address2: string | null;
+      city: string;
+      state: string;
+      zipCode: string;
+    };
+  };
+};
+
 type FormValues = {
   name: string;
   lastName: string;
@@ -62,8 +77,8 @@ const userMessageSchema = Yup.object().shape({
 });
 
 type defaultValue = {
-  checkout: FormValues | null;
-  handleCheckout: (checkout: FormValues) => void;
+  checkout: CheckoutInput | null;
+  handleCheckout: (checkout: CheckoutInput) => void;
 };
 
 const CheckoutContext = createContext({} as defaultValue);
@@ -76,15 +91,18 @@ export default function Checkout(checkData: Comic) {
 
   const onSubmitChek = async (data: FormValues) => {
     const payload = {
-      name: data.name,
-      lastName: data.lastName,
-      zipCode: data.zipCode,
-      cardNumber: data.cardNumber,
-      address: data.address + " , " + data.department + " , " + data.city,
-      id: checkData.id,
-      comicTitle: checkData.title,
-      image: checkData.thumbnail.path + "." + checkData.thumbnail.extension,
-      price: checkData.price,
+      customer: {
+        name: data.name,
+        lastname: data.lastName,
+        email: data.email,
+        address: {
+          address1: data.address,
+          address2: data.department,
+          city: data.city,
+          state: data.province,
+          zipCode: data.zipCode,
+        },
+      },
     };
     console.log(payload);
     alert(
