@@ -33,14 +33,14 @@ export default function CardHero({
   }));
 
   return (
-    <Grid container padding={"3rem"}>
+    <Grid container padding={"1rem"}>
       <Grid md={6}>
         <Box p="1rem">
           <Image src={thumb} width={420} height={500} />
         </Box>
       </Grid>
-      <Grid md={5}>
-        <Box display={"flex"} gap={"3rem"} flexDirection={"column"}>
+      <Grid md={6}>
+        <Box display={"flex"} gap={"3px"} flexDirection={"column"}>
           <Typography variant="h6">Name: {name}</Typography>
           <Typography variant="subtitle1">
             Description: {description}
@@ -52,7 +52,7 @@ export default function CardHero({
           <Stack
             spacing={{ xs: 1, sm: 2 }}
             direction="column"
-            sx={{ width: 200 }}
+            sx={{ width: 300 }}
           >
             {comics?.items.map((character) => {
               const characterId = character.resourceURI
