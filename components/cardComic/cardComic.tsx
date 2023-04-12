@@ -38,36 +38,38 @@ export default function CardComic({
   }));
 
   return (
-    <Grid container padding={"3rem"}>
+    <Grid container padding={"1rem"}>
       <Grid md={6}>
         <Box p="1rem">
           <Image src={thumb} width={420} height={500} />
         </Box>
       </Grid>
       <Grid md={5}>
-        <Box display={"flex"} gap={"3rem"} flexDirection={"column"}>
+        <Box display={"flex"} gap={"3px"} flexDirection={"column"}>
           <Typography variant="h6">Title: {title}</Typography>
           <Typography variant="subtitle1">
             Description: {description}
           </Typography>
 
           <Typography variant="subtitle1">Characters: </Typography>
-          <Stack
-            spacing={{ xs: 1, sm: 2 }}
-            direction="column"
-            sx={{ width: 200 }}
-          >
-            {characters?.items.map((character) => {
-              const characterId = character.resourceURI
-                ? encodeURIComponent(getId(character.resourceURI)!)
-                : "";
-              return (
-                <Link href={`/character/${characterId}`}>
-                  <Item>{`${character.name}`}</Item>
-                </Link>
-              );
-            })}
-          </Stack>
+
+          {characters?.items.map((character) => {
+            const characterId = character.resourceURI
+              ? encodeURIComponent(getId(character.resourceURI)!)
+              : "";
+            return (
+              <Link href={`/character/${characterId}`}>
+                <Item
+                  sx={{
+                    cursor: "pointer",
+                    textDecoration: "underline",
+                    color: "blue",
+                  }}
+                >{`${character.name}`}</Item>
+              </Link>
+            );
+          })}
+
           <Box>
             <Typography
               variant="subtitle1"
