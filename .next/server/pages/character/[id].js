@@ -137,17 +137,8 @@ function Index(data) {
     });
 };
 const getStaticPaths = async ()=>{
-    const { data: comics  } = await (0,marvel_service/* getComics */.o0)(0, 100);
-    const data = comics.results;
-    const paths = data.map((comic)=>{
-        return {
-            params: {
-                id: comic.id.toString()
-            }
-        };
-    });
     return {
-        paths,
+        paths: [],
         fallback: "blocking"
     };
 };

@@ -42,8 +42,8 @@ const getComics = async (offset, limit)=>{
 };
 const getComic = async (comicId)=>{
     const data = await fetchApi(`comics/${comicId}`);
-    const results = data.data.results;
-    if (results.length > 0) {
+    const results = data?.data?.results;
+    if (results?.length > 0) {
         const comic = results[0];
         if (`${comic.id}`.endsWith("0")) {
             comic.price = 48;

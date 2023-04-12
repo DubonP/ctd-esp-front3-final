@@ -1,11 +1,12 @@
 {
-  "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/api/checkout": "pages/api/checkout.js",
-  "/faq": "pages/faq.js",
-  "/checkout/[id]": "pages/checkout/[id].js",
-  "/comic/[id]": "pages/comic/[id].js",
+  "/faq": "pages/faq.html",
   "/": "pages/index.js",
-  "/character/[id]": "pages/character/[id].js"
+  "/_app": "pages/_app.js",
+  "/character/[id]": "pages/character/[id].js",
+  "/comic/[id]": "pages/comic/[id].js",
+  "/checkout/[id]": "pages/checkout/[id].js",
+  "/404": "pages/404.html"
 }
